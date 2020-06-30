@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+vvi check;
+
+void fillPalindrome(string str){
+    int n = str.size();
+    check.clear();
+    check.resize(n,vi(n));
+    for(int i=0;i<n;i++)
+        check[i][i] = 1;
+    for(int i=1;i<n;i++)
+        if(str[i]==str[i-1])
+            check[i-1][i] = 1;
+    for(int i=2;i<n;i++)
+        for(int j=0;j+i<n;j++)
+            if(str[j]==str[j+i]&&check[j+1][i+j-1])
+                check[j][j+i] = 1;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>PalindromeMatrix</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

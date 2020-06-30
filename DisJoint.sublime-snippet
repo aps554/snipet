@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+	struct DS{
+    vector<int>parent;
+    vector<int>nodes;
+    DS(int n){
+        parent.resize(n+1);
+        nodes.resize(n+1);
+        for(int i=0;i<=n;i++){parent[i]=i;nodes[i]=1;}
+    }
+    void join(int a,int b){
+        int x=findparent(a),y=findparent(b);
+        if(x==y)return;
+        parent[x]=y;
+        nodes[y]+=nodes[x];
+    }
+    int findparent(int a){
+        if(a==parent[a])return a;
+        parent[a]=findparent(parent[a]);
+        return parent[a];
+    }
+ };
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>DisjointsetUnion</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+class trie{
+public:
+    vector<trie*> arr;
+    int end;
+    trie(){
+        arr.resize(21);
+        end=0;
+    }
+    void insert(string &str,int ind,int m,int l){
+        if(ind==l) {end=m;return;}
+        if(arr[str[ind]-'a']==NULL){
+            arr[str[ind]-'a']=new trie();
+        }
+        end=m;
+        arr[str[ind]-'a']->insert(str,ind+1,m,l);
+    }
+    int find(string &str,int ind,int l){
+        if(ind==l)return end;
+        if(arr[str[ind]-'a']==NULL)return 0;
+        return arr[str[ind]-'a']->find(str,ind+1,l);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Trie</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

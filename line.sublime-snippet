@@ -1,0 +1,40 @@
+<snippet>
+	<content><![CDATA[
+struct point{
+    ld x,y;
+    point(){}
+    point(ld a,ld b){x=a,y=b;}
+};
+struct line{
+    ld a,b,c;
+    line(ld x,ld y,ld z){a=x,b=y,c=z;}
+    line(point A,point B,int perpendicular=0){
+        ld g=A.x,h=A.y,e=B.x,f=B.y;
+        if(!perpendicular){        
+            a=h-f;b=e-g;c=g*g-h*h+f*h-e*g;
+            if(a<0){a=-a;b=-b;c=-c;}
+        }
+        else{
+            ld p=(g+e)/2.0,q=(h+f)/2.0;
+            a=e-g;b=f-h;c=g*p-e*p+h*q-f*q;
+            if(a<0){a=-a;b=-b;c=-c;}
+        }
+    }
+    point intersection(line w){
+        ld g=w.a,h=w.b,i=w.c;
+        point ans;
+        if(g*b-a*h==0){
+            ans.x=MX,ans.y=MX;return ans;
+        }
+        ans.y=(a*i-g*c)/(g*b-a*h);
+        ans.x=(-1*(b*ans.y+c))/a;
+        return ans;
+    }
+    void print(){cout<<a<<" "<<b<<" "<<c<<endl;}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Line</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

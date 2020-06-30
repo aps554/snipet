@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+int isV(char a){
+	if(a=='a')return 1;
+	if(a=='e')return 2;
+	if(a=='i')return 3;
+	if(a=='o')return 4;
+	if(a=='u')return 5;
+	return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>IsVovel</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

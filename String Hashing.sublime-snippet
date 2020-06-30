@@ -1,0 +1,55 @@
+<snippet>
+	<content><![CDATA[
+int gen_base(const int before, const int after) {
+    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    std::mt19937 mt_rand(seed);
+    int base = std::uniform_int_distribution<int>(before+1, after)(mt_rand);
+    return base % 2 == 0 ? base-1 : base;
+}
+int mod,base,mxPow;
+vector<int>pow1(1,1);
+vector<ull>pow2(1,1);
+struct Polyhash{
+    vector<int>pref1,pref2;
+    int n;
+    Polyhash(string &s){
+        n=s.size();
+        pref1.resize(n+1);pref2.resize(n+1);
+        for(int i=0;i<n;i++){
+            pref1[i+1]=(pref1[i]+1LL*s[i]*pow1[i])%mod;
+            pref2[i+1]=pref2[i]+s[i]*pow2[i];
+        }
+    }
+    pair<int,ull> findhash(int pos,int len){
+        int hash1=pref1[pos+len]-pref1[pos];
+        ull hash2=pref2[pos+len]-pref2[pos];
+        if(hash1<0)hash1+=mod;
+        hash1=1LL*hash1*pow1[mxPow-(pos+len-1)]%mod;
+        hash2*=pow2[mxPow-(pos+len-1)];
+        return {hash1, hash2};
+    }
+};
+pair<int,ull> stringtohash(string s){
+    int n=s.size(),a=0;
+    ull b=0;
+    for(int i=0;i<n;i++){
+        a=(a+1LL*s[i]*pow1[i])%mod;
+        b=b+s[i]*pow2[i];
+    }
+    return {a,b};
+}
+void init_poly(int n){
+    mod=(int)1e9+123;
+    mxPow=n;
+    base = gen_base(256,mod);
+    while((int)pow1.size()<=n){
+        pow1.pb((pow1.back()*base)%mod);
+        pow2.pb(pow2.back()*base);
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>StrinHashing</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

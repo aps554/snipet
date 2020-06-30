@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+int powerM(int a,int b,int m = M){
+    int ans = 1;
+    while(b){
+        int lb = (b&1);
+        if(lb)    ans = (ans*a)%m;
+        a = (a*a)%m;  b = b>>1;  
+    }    return ans;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>PowModM</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

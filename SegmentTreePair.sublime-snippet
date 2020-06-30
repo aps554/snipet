@@ -1,0 +1,87 @@
+<snippet>
+	<content><![CDATA[
+vector<int>v;
+struct SegTree
+{
+     int N;
+     vector<pii> st;
+     vector<int> lazy;
+ 
+     void init(int n){
+          N = n;
+          st.resize(4 * N + 5, {0, 0});
+          lazy.assign(4 * N + 5, 0);
+     }
+
+
+     void merge(pii &cur, pii &l, pii &r){
+          cur.ff = min(l.ff, r.ff);
+          cur.ss = max(l.ss, r.ss);
+     }
+
+     void Build(int node,int L,int R){
+          if(L==R){
+               st[node].ff = v[L-1];
+               st[node].ss = v[L-1];
+               return;
+          }
+          int MM=(L+R)/2;
+          Build(node*2,L,MM);
+          Build(node*2+1,MM+1,R);
+          merge(st[node],st[node*2],st[node*2+1]);
+     }
+ 
+     void propagate(int node, int L, int R){
+          st[node].ff += lazy[node];
+          st[node].ss += lazy[node];
+ 
+          if (L != R) {
+               lazy[node * 2] += lazy[node];
+               lazy[node * 2 + 1] += lazy[node];
+          }
+ 
+          lazy[node] = 0;
+     }
+ 
+     pii Query(int node, int L, int R, int i, int j){
+          if (lazy[node])
+               propagate(node, L, R);
+          if (j < L || i > R)
+               return {1e18, -1e18};
+          if (i <= L && R <= j)
+               return st[node];
+ 
+          int M = (L + R) / 2;
+          pii left = Query(node * 2, L, M, i, j);
+          pii right = Query(node * 2 + 1, M + 1, R, i, j);
+          return {min(left.ff, right.ff), max(left.ss, right.ss)};
+     }
+ 
+     void Update(int node, int L, int R, int i, int j, int val){
+          if (lazy[node])
+               propagate(node, L, R);
+          if (j < L || i > R)
+               return;
+
+          if (i <= L && R <= j) {
+               lazy[node] += val;
+               propagate(node, L, R);
+               return;
+          }
+          int M = (L + R) / 2;
+          Update(node * 2, L, M, i, j, val);
+          Update(node * 2 + 1, M + 1, R, i, j, val);
+          merge(st[node], st[node * 2], st[node * 2 + 1]);
+    }
+ 
+    pii query(int l, int r) { return Query(1, 1, N, l, r); }
+    void build(){Build(1,1,N);}
+    void update(int l, int r, int val) { Update(1, 1, N, l, r, val); }
+ 
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>SegmentTreePair</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+struct CustomCompare
+{
+    bool operator()(const pii& lhs, const pii& rhs)
+    {
+        if(lhs.ff!=rhs.ff)return lhs.ff < rhs.ff;
+        return lhs.ss<rhs.ss;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>CompareClass</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

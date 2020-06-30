@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+vi lis;
+void largestIncS(vi & arr){
+    set<int> g;
+    for(int i=0;i<arr.size();i++){
+        g.insert(arr[i]);
+        auto it = g.upper_bound(arr[i]);
+        if(it!=g.end()){
+            g.erase(it);
+        }
+    }
+    for(auto a:g)
+        lis.pb(a);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Lis</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,20 @@
+<snippet>
+	<content>
+class dll{
+public:
+    int data;
+    dll *next;
+    dll *prev;
+    dll(int a){
+        data = a;
+        prev = NULL;
+        next = NULL;
+    }
+};
+
+	</content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>DLL</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

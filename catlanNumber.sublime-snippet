@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+vvi ncr(1001,vi(1001));
+void ncrBuild(){
+    ncr[0][0]=1;
+    for(int i=1;i<1001;i++)ncr[i][0]=1;
+    for(int i=1;i<1001;i++){
+        for(int j=1;j<1001;j++){
+            ncr[i][j]=ncr[i-1][j]+ncr[i-1][j-1];
+        }
+    }
+}
+
+int dddeeefff = 1;
+int catlan(int n){
+    db1(dddeeefff)
+    if(dddeeefff){
+        ncrBuild();
+        dddeeefff = 0;
+    }
+    return ncr[2*n][n]/(n+1);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>CatlanNumber</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

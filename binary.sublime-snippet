@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+
+string binary(int m){
+    string str =bitset<63>(m).to_string(); 
+    R(str);
+    return str;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Binary</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
